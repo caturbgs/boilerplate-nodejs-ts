@@ -1,6 +1,7 @@
-import {Column, Entity, ManyToOne} from "typeorm";
+import {Column, Entity, ManyToOne, OneToMany} from "typeorm";
 import {Customers} from "./customers";
 import {BaseEntity} from "./base_entity";
+import {OrderItem} from "./order_item";
 
 @Entity()
 export class Orders extends BaseEntity {
@@ -13,4 +14,6 @@ export class Orders extends BaseEntity {
     @Column()
     totalAmount: number;
 
+    @OneToMany(() => OrderItem, orderItem => orderItem.order)
+    public order!: OrderItem[];
 }
