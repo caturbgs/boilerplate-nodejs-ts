@@ -1,12 +1,10 @@
-import {Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+import {Column, Entity} from "typeorm";
 import {Body, RequestBody} from "../interfaces/request";
 import {pick} from "lodash";
+import {BaseEntity} from "./base_entity";
 
 @Entity()
-export class User implements RequestBody {
-    @PrimaryGeneratedColumn("uuid")
-    id: string;
-
+export class Users extends BaseEntity implements RequestBody {
     @Column()
     firstName: string;
 
@@ -24,15 +22,6 @@ export class User implements RequestBody {
 
     @Column()
     salt: string;
-
-    @CreateDateColumn()
-    createdAt: Date;
-
-    @UpdateDateColumn()
-    updatedAt: Date;
-
-    @DeleteDateColumn()
-    deletedAt: Date;
 
     fromJson(data: Body): void {
         Object

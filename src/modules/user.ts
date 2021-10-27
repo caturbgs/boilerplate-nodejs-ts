@@ -2,7 +2,7 @@ import {module} from "../decorator/module";
 import {del, get, post, put} from "../decorator/route";
 import {getCustomRepository} from "typeorm";
 import {UserRepository} from "../repository/user";
-import {User} from "../entity/user";
+import {Users} from "../entity/users";
 import {Context} from "koa";
 
 @module("/users")
@@ -19,8 +19,8 @@ export default class UserModule {
         };
     }
 
-    @post("/", [], User)
-    public async post(ctx: Context, body: User): Promise<void> {
+    @post("/", [], Users)
+    public async post(ctx: Context, body: Users): Promise<void> {
         ctx.log.info("yo start");
 
         const userRepository = getCustomRepository(UserRepository);
@@ -36,8 +36,8 @@ export default class UserModule {
     }
 
 
-    @put("/:id", [], User)
-    public async put(ctx: Context, body: User): Promise<void> {
+    @put("/:id", [], Users)
+    public async put(ctx: Context, body: Users): Promise<void> {
         const userRepository = getCustomRepository(UserRepository);
 
         const user = await userRepository.findOne(ctx.params.id);
